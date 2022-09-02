@@ -24,6 +24,35 @@ export default function Home() {
   const web3ModalRef = useRef();
 
 
+  // const mint 
+
+  const mint = async () =>{
+    try{
+      //need a signer to write the txn
+      const signer = await getProviderOrSigner(true);
+       // Create a new instance of the Contract with a Signer, which allows
+        // update methods
+        const citaContract = new Contract(
+          NFT_CONTRACT_ADDRESS,
+          abi,
+          signer
+        );
+        // call the mint function to mint nft to user 
+        const tx = await citaContract.mint({
+          //value parsing showing price of nft
+          value:utils.parseEther("0.00"),
+        });
+        setLoading(true);
+        // waiting for txn to be executed
+        await tx.wait();
+        setLoading(false);
+        window.alert("You minted a cita Nft Successfully");
+    }catch (err){
+      console.error(err);
+    }
+  };
+
+
 
 
 
