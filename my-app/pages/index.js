@@ -67,6 +67,35 @@ export default function Home() {
 
   };
 
+
+  // check if presale is started
+
+  const checkIfpresaleStarted = async() =>{
+    try{
+      //signer to write txn
+      const signer = await getProviderOrSigner(true);
+     // Create a new instance of the Contract with a Signer, which allows
+        // update methods
+        const citaContract = new Contract(
+          NFT_CONTRACT_ADDRESS,
+          abi,
+          signer
+        );
+        // to call the presaleStarted function 
+        const presaleStarted = await citaContract.presaleStarted();
+        if (!presaleStarted){
+          await getOwner();
+        }
+        setPresaleStarted(presaleStarted);  
+        return presaleStarted;
+    }catch (err){
+      console.error(err);
+      return(false);
+    }
+    
+  }
+
+
   // to start presale of the nft
 
   const startPresale = async() =>{
@@ -93,6 +122,35 @@ export default function Home() {
       console.error(err);
     }
   };
+
+
+  // to get owner of the contract
+
+  const getOwner = async() =>{
+    try {
+      // Get the provider from web3Modal, which in our case is MetaMask
+      // No need for the Signer here, as we are only reading state from the blockchain
+      const provider = await getProviderOrSigner();
+      // We connect to the Contract using a Provider, so we will only
+      // have read-only access to the Contract
+      const citaContract = new Contract(
+         NFT_CONTRACT_ADDRESS,
+         abi,
+         provider
+        );
+      // call the owner function from the contract
+      const _owner = await citaContract.owner();
+      // We will get the signer now to extract the address of the currently connected MetaMask account
+      const signer = await getProviderOrSigner(true);
+      // Get the address associated to the signer which is connected to  MetaMask
+      const address = await signer.getAddress();
+      if (address.toLowerCase() === _owner.toLowerCase()) {
+        setIsOwner(true);
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 
 
 
