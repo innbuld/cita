@@ -150,7 +150,65 @@ export default function Home() {
     } catch (err) {
       console.error(err.message);
     }
-  }
+  };
+
+  // get number of nfts minted 
+
+  const getTokenIdsMinted = async() =>{
+   try{
+     // get the web3modal provider
+     const provider = await getProviderOrSigner();
+     // connect to the contract
+     const citaContract = new Contract(
+       NFT_CONTRACT_ADDRESS,
+       abi,
+       provider
+     );
+     // call the tokenIds from the contract
+     const tokenIds = await citaContract.tokenIds();
+     // convert tokenId to string 
+     setTokenIdsMinted(tokenIds.toString());
+   }catch(err){
+    console.error(err);
+   }
+  };
+
+
+  // set up a wallet provider option
+
+  const getProviderOrSigner = async() =>{
+    // connect to metamsk since web3modal supports metamsk
+    const provider = await web3ModalRef.current.connect();
+    const web3Provider = new providers.Web3Provider(provider)
+
+    // prompt user to connect to the right network
+    const { chainId } = await web3Provider.getNetwork();
+   if (chainId !== 5) {
+     window.alert("Change the network to Goerli");
+     throw new Error("Change network to Goerli");
+   }
+
+   if (needSigner) {
+      const signer = web3Provider.getSigner();
+      return signer;
+     }
+     return web3Provider;
+    }
+
+    const providerOptions = {
+      binancechainwallet: {
+        package:true,
+      },
+      walletconnect: {
+        package: WalletConnectProvider,
+        options: {
+          rpc: {
+            5: "https://goerli.infura.io/v3/",
+          },
+          chainId: 5,
+        },
+      },
+    };
 
 
 
