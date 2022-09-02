@@ -52,6 +52,48 @@ export default function Home() {
     }
   };
 
+  // connect wallet
+
+  const connectWallet = async() =>{
+    try{
+      //using web3modal , metamask
+      // when used for the first time , a prompt to connect wallet will pop
+      const signer = await getProviderOrSigner(true);
+      // to set wallet connected is true 
+      setWalletConnected(true)
+    }catch (err){
+      console.error(err);
+    }
+
+  };
+
+  // to start presale of the nft
+
+  const startPresale = async() =>{
+    try{
+      // signer to write the txn
+      const signer = await getProviderOrSigner(true);
+      // Create a new instance of the Contract with a Signer, which allows
+        // update methods
+        const citaContract = new Contract(
+          NFT_CONTRACT_ADDRESS,
+          abi,
+          signer
+        );
+        // to call the start presale function 
+
+        const tx = await citaContract.startPresale();
+        setLoading(true);
+        // wait for txn to be completed
+        await tx.wait();
+        setLoading(false);
+        // checl startPresale to true
+        await checkIfpresaleStarted();
+    } catch(err) {
+      console.error(err);
+    }
+  };
+
 
 
 
