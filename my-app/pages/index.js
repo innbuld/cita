@@ -211,6 +211,19 @@ export default function Home() {
     };
 
 
+    // on disconnect
+
+    const onDisconnect = async() => {
+      try{
+        await web3ModalRef.current.clearCachedProvider();
+        setWalletConnected(false);
+        console.log("Disconnected")
+      }catch (err){
+        console.error(err);
+      }
+    };
+
+
 
 
 
