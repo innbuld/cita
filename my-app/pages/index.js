@@ -224,6 +224,39 @@ export default function Home() {
     };
 
 
+    // use effect
+
+
+     useEffect(() => {
+      // if wallwt is not connected, create an instance to connect
+      if (!walletConnected){
+        web3ModalRef.current = new web3Modal({
+          network: "Goerli",
+          providerOptions,
+          CacheProvider: false,
+          disableInjectedProvider: false,
+
+        });
+
+         // Check if presale has started and if sale is not paused
+          const presaleStarted = checkIfPresaleStarted();
+          if (presaleStarted) {
+            checkIfsetPaused();
+          }
+
+          // get tokensId minted
+
+          getTokenIdsMinted()
+
+          // to check num of tokens minted every 3 sec
+
+          setInterval(async function(){
+            await getTokenIdsMinted();
+          }, 3 * 1000 );
+      }
+     }, [walletConnected]);
+
+
 
 
 
