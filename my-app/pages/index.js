@@ -272,7 +272,7 @@ export default function Home() {
         //     await getTokenIdsMinted();
         //   }, 3 * 1000 );
       }
-     }, [walletConnected]);
+     }, []);
 
 
 
