@@ -1,9 +1,10 @@
-import {Contract, providers, utils} from "ethers";
+import { Contract, providers, utils } from "ethers";
 import Head from "next/head";
-import Link from "next/link";
-import Web3modal from "web3modal";
+import Link from 'next/link'
+import React, { useEffect, useRef, useState } from "react";
+import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import {abi, NFT_CONTRACT_ADDRESS } from "../constants";
+import { abi, NFT_CONTRACT_ADDRESS } from "../constants";
 import styles from "../styles/Home.module.css";
 import navStyles from '../styles/Navbar.module.css'
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri"
@@ -66,6 +67,23 @@ export default function Home() {
     }
 
   };
+
+  // check if sale is paused
+
+  const checkIfsetPaused = async() =>{
+    try{
+      const signer = await getProviderOrSigner(true);
+      const citaContract = new Contract(
+        NFT_CONTRACT_ADDRESS,
+        abi,
+        signer
+      );
+      const setPaused = await citaContract.setPaused();
+      setPaused(true);
+    }catch (err){
+      console.error(err);
+    }
+  }
 
 
   // check if presale is started
@@ -176,7 +194,7 @@ export default function Home() {
 
   // set up a wallet provider option
 
-  const getProviderOrSigner = async() =>{
+  const getProviderOrSigner = async(needSigner = false) =>{
     // connect to metamsk since web3modal supports metamsk
     const provider = await web3ModalRef.current.connect();
     const web3Provider = new providers.Web3Provider(provider)
@@ -230,7 +248,7 @@ export default function Home() {
      useEffect(() => {
       // if wallwt is not connected, create an instance to connect
       if (!walletConnected){
-        web3ModalRef.current = new web3Modal({
+        web3ModalRef.current = new Web3Modal({
           network: "Goerli",
           providerOptions,
           CacheProvider: false,
@@ -239,7 +257,7 @@ export default function Home() {
         });
 
          // Check if presale has started and if sale is not paused
-          const presaleStarted = checkIfPresaleStarted();
+          const presaleStarted = checkIfpresaleStarted();
           if (presaleStarted) {
             checkIfsetPaused();
           }
