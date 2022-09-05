@@ -258,6 +258,79 @@ export default function Home() {
 
 
 
+      // button to connect and disconnect wallet for user 
+
+     const renderMenuButton = () => {
+      if(!walletConnected){
+        return (
+          <div className={navStyles.navbar_menu_container_button}>
+          <button onClick={connectWallet}>Connect Wallet</button>
+        </div>
+        )
+      } 
+      if(walletConnected) {
+        return(
+          <div className={navStyles.navbar_menu_container_button}>
+            <button onClick={onDisconnect}>Disconnect</button>
+          </div>
+        )
+      }
+    }
+
+    // button admin to connect wallet, also if contract owner can start presale if not started
+
+    const renderButton = () =>{
+      if(!walletConnected){
+        return (
+          <div className={navStyles.navbar_button}>
+          <button onClick={connectWallet}>Connect Wallet</button>
+        </div>
+        )
+      } 
+      
+        if ( isOwner && !presaleStarted){
+          return(
+            <div className={navStyles.navbar_button}>
+              <button onClick={startPresale}>Start Sale</button>
+            </div>
+          )
+        }
+    
+    
+      else if(walletConnected) {
+      
+        return(
+          <div className={navStyles.navbar_button}>
+            <button onClick={onDisconnect}>Disconnect</button>
+          </div>
+        )
+      }
+      
+    }
+    
+    
+    //  mint button 
+    
+      const renderMint = () => {
+        if(walletConnected){
+          if (walletConnected){
+            return (<button onClick={mint}>Mint Cita</button>)
+          }else if(loading){
+            return (<button>Loading...</button>)
+          }else if(tokenIdsMinted >= 333){
+            return <h3>Supply sold out</h3>
+          }else{
+            return(<h3>Wait for sale to start</h3>)
+          }
+        }else{
+          return (<h3>Connect your wallet to Mint</h3>)
+        }
+      }
+
+
+
+
+
 
 
 
