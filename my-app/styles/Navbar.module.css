@@ -57,6 +57,7 @@
     height: 58px;
     cursor: pointer;
     background-color: black;
+    color: white;
     font-weight: 500;
     line-height: 25px;
     border-radius: 10px;
@@ -68,8 +69,8 @@
 }
 
 .navbar_button button:hover{
-    background-color: black;
-    color:white;
+    background-color: transparent;
+    color:black;
     outline: 1px solid white;
 }
 
