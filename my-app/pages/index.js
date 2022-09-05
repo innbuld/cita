@@ -213,6 +213,8 @@ export default function Home() {
      return web3Provider;
     }
 
+    
+
     const providerOptions = {
       binancechainwallet: {
         package:true,
@@ -272,7 +274,7 @@ export default function Home() {
         //     await getTokenIdsMinted();
         //   }, 3 * 1000 );
       }
-     }, []);
+     }, [walletConnected]);
 
 
 
@@ -407,7 +409,7 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.mainImage}>
-                <img src='./ddd.svg' ></img> 
+                <img src='./ddd.svg' alt="main image"></img> 
               </div>
           </div>
       
