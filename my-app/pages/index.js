@@ -256,21 +256,21 @@ export default function Home() {
 
         });
 
-         // Check if presale has started and if sale is not paused
-          const presaleStarted = checkIfpresaleStarted();
-          if (presaleStarted) {
-            checkIfsetPaused();
-          }
+        //  // Check if presale has started and if sale is not paused
+        //   const presaleStarted = checkIfpresaleStarted();
+        //   if (presaleStarted) {
+        //     checkIfsetPaused();
+        //   }
 
-          // get tokensId minted
+        //   // get tokensId minted
 
-          getTokenIdsMinted()
+        //   getTokenIdsMinted()
 
-          // to check num of tokens minted every 3 sec
+        //   // to check num of tokens minted every 3 sec
 
-          setInterval(async function(){
-            await getTokenIdsMinted();
-          }, 3 * 1000 );
+        //   setInterval(async function(){
+        //     await getTokenIdsMinted();
+        //   }, 3 * 1000 );
       }
      }, [walletConnected]);
 
