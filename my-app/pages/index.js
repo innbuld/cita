@@ -384,7 +384,7 @@ export default function Home() {
                   
                 <p>Cita Nft is a collection of free 333 epic NFT's, which provides access to the Cita Dao community, a total supply of 333 would be given out for free FCFS</p>
               <div className={styles.mint_button}>
-                 {/* {renderButton()} */}
+                 
                 <p>Scroll Down To Mint Your CT Nft And Be Part Of The Community</p>
               </div>
             </div>
