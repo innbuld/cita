@@ -213,8 +213,6 @@ export default function Home() {
      return web3Provider;
     }
 
-    
-
     const providerOptions = {
       binancechainwallet: {
         package:true,
