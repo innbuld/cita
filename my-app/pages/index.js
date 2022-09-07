@@ -58,18 +58,39 @@ export default function Home() {
 
   // connect wallet
 
-  const connectWallet = async() =>{
-    try{
-      //using web3modal , metamask
-      // when used for the first time , a prompt to connect wallet will pop
+  // const connectWallet = async() =>{
+  //   try{
+  //     //using web3modal , metamask
+  //     // when used for the first time , a prompt to connect wallet will pop
+  //     const signer = await getProviderOrSigner(true);
+  //     // to set wallet connected is true 
+  //     setWalletConnected(true)
+  //   }catch (err){
+  //     console.error(err);
+  //   }
+
+  // };
+
+
+  const connectWallet = async () => {
+    try {
+      web3ModalRef.current = new Web3Modal({
+        providerOptions,
+        cacheProvider: false,
+        disableInjectedProvider: false,
+      });
       const signer = await getProviderOrSigner(true);
-      // to set wallet connected is true 
-      setWalletConnected(true)
-    }catch (err){
+     
+      setWalletConnected(true);
+      
+      
+
+      console.log("Wallet Connected");
+    } catch (err) {
       console.error(err);
     }
-
   };
+  
 
   // check if sale is paused
 
