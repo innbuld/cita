@@ -52,6 +52,9 @@ export default function Home() {
       console.error(err);
     }
   };
+  // const to transfer from 
+
+ 
 
   // connect wallet
 
@@ -400,7 +403,7 @@ export default function Home() {
             <div className={styles.main_content}>
                 <h1 className={styles.main_text}>Join the Cita NFT Mint today !</h1>
                   
-                <p>Cita Nft is a collection of free 333 epic NFT's, which provides access to the Cita Dao community, a total supply of 333 would be given out for free FCFS</p>
+                <p>Cita Nft is a collection of free 333 epic NFTs, which provides access to the Cita Dao community, a total supply of 333 would be given out for free FCFS</p>
               <div className={styles.mint_button}>
                  
                 <p>Scroll Down To Mint Your CT Nft And Be Part Of The Community</p>
