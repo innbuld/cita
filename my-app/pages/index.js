@@ -1,5 +1,6 @@
 import { Contract, providers, utils } from "ethers";
 import Head from "next/head";
+import Image from "next/image"
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
@@ -431,7 +432,7 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.mainImage}>
-                <img src='./ddd.svg' ></img> 
+                <Image src='/ddd.svg' alt="main image" width={500} height={500}/> 
               </div>
           </div>
       
